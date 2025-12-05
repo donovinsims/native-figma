@@ -10,16 +10,14 @@ import AppDetailPage from "./components/app-detail/AppDetailPage";
 import AppDetailBottomSheet from "./components/app-detail/AppDetailBottomSheet";
 import { SubscribeModal } from "./components/modals/SubscribeModal";
 import { SubmitAppModal } from "./components/modals/SubmitAppModal";
-import { LoginModal } from "./components/modals/LoginModal";
-import { SignupModal } from "./components/modals/SignupModal";
+import { AuthModal } from "./components/modals/AuthModal";
 import { Toaster } from "./components/ui/sonner";
 import { websitesData, appDetailsData } from "./data/appsData";
 
 export default function App() {
   const subscribeModal = useModal();
   const submitModal = useModal();
-  const loginModal = useModal();
-  const signupModal = useModal();
+  const authModal = useModal();
   const [selectedAppId, setSelectedAppId] = useState<string | null>(null);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -67,16 +65,7 @@ export default function App() {
         />
         <SubscribeModal isOpen={subscribeModal.isOpen} onClose={subscribeModal.close} />
         <SubmitAppModal isOpen={submitModal.isOpen} onClose={submitModal.close} />
-        <LoginModal 
-          isOpen={loginModal.isOpen} 
-          onClose={loginModal.close}
-          onSwitchToSignup={signupModal.open}
-        />
-        <SignupModal 
-          isOpen={signupModal.isOpen} 
-          onClose={signupModal.close}
-          onSwitchToLogin={loginModal.open}
-        />
+        <AuthModal isOpen={authModal.isOpen} onClose={authModal.close} />
         <Toaster position="bottom-center" />
       </>
     );
@@ -88,7 +77,7 @@ export default function App() {
       <HeaderNavigation 
         onSubscribeClick={subscribeModal.open}
         onSubmitClick={submitModal.open}
-        onLoginClick={loginModal.open}
+        onLoginClick={authModal.open}
       />
       
       <div className="flex pt-[67px]">
@@ -106,16 +95,7 @@ export default function App() {
       {/* Modals */}
       <SubscribeModal isOpen={subscribeModal.isOpen} onClose={subscribeModal.close} />
       <SubmitAppModal isOpen={submitModal.isOpen} onClose={submitModal.close} />
-      <LoginModal 
-        isOpen={loginModal.isOpen} 
-        onClose={loginModal.close}
-        onSwitchToSignup={signupModal.open}
-      />
-      <SignupModal 
-        isOpen={signupModal.isOpen} 
-        onClose={signupModal.close}
-        onSwitchToLogin={loginModal.open}
-      />
+      <AuthModal isOpen={authModal.isOpen} onClose={authModal.close} />
       
       {/* Bottom Sheet for Mobile */}
       <AppDetailBottomSheet
