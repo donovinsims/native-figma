@@ -53,17 +53,21 @@ function WebsiteCard({ item, onClick }: { item: Website; onClick?: (id: string) 
   };
 
   return (
-    <div className="group">
-      {/* Card Preview - Just the image/video */}
+    <div className="flex flex-col gap-2">
+      {/* Card Preview */}
       <motion.button
         onClick={handleClick}
-        className="w-full block rounded-lg overflow-hidden hover:opacity-90 transition-opacity duration-200 border border-gray-200"
+        className="relative w-full block overflow-hidden hover:opacity-90 transition-opacity duration-200"
+        style={{
+          background: 'black',
+          borderRadius: '6px'
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         whileTap={{ scale: 0.97 }}
         transition={{ type: "spring", stiffness: 400, damping: 17 }}
       >
-        <div className="relative w-full aspect-[4/3] bg-gray-900 overflow-hidden">
+        <div className="relative w-full aspect-[333/225]">
           {!videoError ? (
             <video
               className="w-full h-full object-cover"
@@ -88,48 +92,78 @@ function WebsiteCard({ item, onClick }: { item: Website; onClick?: (id: string) 
               />
             </div>
           )}
+          {/* Border overlay */}
+          <div 
+            className="absolute inset-0 pointer-events-none rounded-lg border border-gray-200"
+          />
         </div>
       </motion.button>
 
-      {/* Title and Actions Row */}
-      <div className="flex items-center justify-between mt-4 gap-3">
+      {/* Actions - Name, Category, Bookmark, and External Link */}
+      <div className="flex items-center justify-between">
+        {/* Name & Category */}
         <button 
           onClick={handleClick}
-          className="flex items-center gap-2 text-left flex-1 min-w-0"
+          className="flex items-center gap-1 text-left flex-1 min-w-0"
         >
-          <h3 className="text-black truncate">
+          <div style={{
+            color: '#151515',
+            fontSize: '14px',
+            fontWeight: '700',
+            lineHeight: '16px'
+          }}>
             {item.title}
-          </h3>
+          </div>
           {item.category && (
             <>
-              <span className="text-gray-400">·</span>
-              <span className="text-gray-400 text-sm truncate">
+              <div style={{
+                opacity: 0.5,
+                color: '#151515',
+                fontSize: '14px',
+                fontWeight: '400',
+                lineHeight: '16px'
+              }}>
+                ·
+              </div>
+              <div style={{
+                opacity: 0.5,
+                color: '#151515',
+                fontSize: '14px',
+                fontWeight: '400',
+                lineHeight: '16px'
+              }} className="truncate">
                 {item.category}
-              </span>
+              </div>
             </>
           )}
         </button>
 
-        <div className="flex items-center gap-2 flex-shrink-0">
+        {/* Bookmark and External Icons */}
+        <div className="flex items-center gap-1 flex-shrink-0">
+          {/* Bookmark Icon */}
           <motion.button
             onClick={handleBookmark}
-            className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-black transition-colors"
+            className="w-6 h-6 flex items-center justify-center"
             whileTap={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             aria-label={isBookmarked ? "Remove bookmark" : "Add bookmark"}
+            style={{ opacity: 0.5 }}
           >
             <Bookmark 
-              className={`w-5 h-5 ${isBookmarked ? "fill-current" : ""}`}
+              className={`w-4 h-4 text-black ${isBookmarked ? "fill-current" : ""}`}
             />
           </motion.button>
+
+          {/* External Link Icon */}
           <motion.button
             onClick={handleExternalLink}
-            className="w-8 h-8 flex items-center justify-center text-gray-600 hover:text-black transition-colors"
+            className="w-6 h-6 flex items-center justify-center"
             whileTap={{ scale: 0.9 }}
             transition={{ type: "spring", stiffness: 400, damping: 17 }}
             aria-label="Open in new tab"
+            style={{ opacity: 0.5 }}
           >
-            <ExternalLink className="w-5 h-5" />
+            <ExternalLink className="w-4 h-4 text-black" />
           </motion.button>
         </div>
       </div>
