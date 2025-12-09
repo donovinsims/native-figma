@@ -88,7 +88,12 @@ const HeaderNavigation = ({ onSubscribeClick, onSubmitClick, onLoginClick }: Hea
           <div className="flex items-center gap-2">
             <button
               onClick={onLoginClick}
-              className="hidden md:block select-none rounded-lg border border-gray-200 bg-white px-3 py-[6px] text-black transition-all duration-200 hover:bg-gray-50 active:scale-99 text-sm"
+              className="hidden md:block select-none rounded-lg border border-gray-200 bg-white px-4 py-2 text-black transition-all duration-200 hover:bg-gray-50 active:scale-99 w-[100px]"
+              style={{
+                fontSize: '14px',
+                fontWeight: '500',
+                lineHeight: '20px'
+              }}
             >
               Sign In
             </button>

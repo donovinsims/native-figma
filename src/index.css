@@ -769,6 +769,10 @@
     width: 97px;
   }
 
+  .w-\[100px\] {
+    width: 100px;
+  }
+
   .w-full {
     width: 100%;
   }
