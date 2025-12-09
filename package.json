@@ -1,6 +1,6 @@
 
   {
-      "name": "Build and Run Code Base",
+      "name": "native",
       "version": "0.1.0",
       "private": true,
       "dependencies": {
